@@ -1,4 +1,4 @@
-getgenv().SHold = {
+getgenv().S_Hold = {
     Enabled = false;
     Notifications = true;
     Keybind = 'k';
@@ -6,20 +6,20 @@ getgenv().SHold = {
 
 -- [[ ======================================================================================== ]]
 local ChildAdded = function(Child)
-    if (not SHold.Enabled) then return end
+    if (not S_Hold.Enabled) then return end
     if (not Child:IsA('Tool')) then return end
 
     local Handle = Child.Handle
     if (not Handle) then return end
 
-    for Descendant in next, Handle:GetDescendants() do
+    for _, Descendant in next, Handle:GetDescendants() do
         if (Descendant:IsA('TouchTransmitter')) then
             Descendant:Destroy()
         end
     end
 end
 
-for , Player in next, game.Players:GetPlayers() do
+for _, Player in next, game.Players:GetPlayers() do
     if (Player == game.Players.LocalPlayer) then continue end
 
     Player.CharacterAdded:Connect(function(Character)
